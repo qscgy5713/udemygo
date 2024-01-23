@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/qscgy5713/udemygo./pkg2"
 	"github.com/qscgy5713/udemygo/pkg1"
+	"github.com/qscgy5713/udemygo/pkg2"
 )
 
 func main() {
