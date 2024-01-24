@@ -113,4 +113,56 @@ func chapter1() {
 	fmt.Println(t4)
 	t5 := strings.Split(text3, " ")
 	fmt.Printf("%v\n", t5)
+
+	// 指針
+	var x int = 100
+	fmt.Printf("取得 x 的內存地址:%x\n", &x)
+	var ptr *int = &x
+	fmt.Printf("指針變量 pt直: %d\n", *ptr)
+	var ptr1 *int
+	if ptr1 == nil {
+		fmt.Println("ptr1 是 空指針")
+	}
+
+	// 二級指針
+	var p1 *int
+	var p2 **int // 二級指針
+	var p int = 100
+	p1 = &p  // 取得p 的變量地址
+	p2 = &p1 // 取得p1 的變量地址
+	fmt.Println(p)
+	fmt.Println(*p1)
+	fmt.Println(**p2)
+
+	// 陣列聲明
+	arr1 := [3]int{1, 2, 3}
+	arr2 := [...]float32{1.1, 1.3, 1.5}
+	fmt.Printf("arr1=%d\n", arr1)
+	fmt.Printf("arr2=%f\n", arr2[1:3])
+
+	// slice
+
+	strSlice := []string{"'a'", "'b'", "c"}
+	intSlice := []int{1, 2, 3, 4, 5}
+	//使用 make()函數聲明 slice
+	var intSlice2 = make([]int, 10)
+	var strSlice2 = make([]string, 10)
+	fmt.Println(strSlice)
+	fmt.Println(strSlice2)
+	fmt.Println(intSlice[:3])
+	fmt.Println(intSlice2)
+
+	// append
+	var slice1 []int
+	fmt.Println(slice1)
+	slice1 = append(slice1, 1)
+	slice1 = append(slice1, 2, 3, 4, 5, 6, 7)
+	fmt.Println(slice1)
+
+	// 映射類型
+	var map1 = map[string]string{"aa": "bb", "cc": "dd"}
+	fmt.Println(map1["aa"])
+	var map1Make = make(map[int]string)
+	map1Make[102] = "222"
+	fmt.Println(map1Make[102])
 }
