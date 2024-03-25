@@ -9,7 +9,27 @@ import (
 )
 
 func main() {
-	chapter1()
+	s := "([{]])"
+	isValid(s)
+}
+
+func isValid(s string) bool {
+	stack := make([]rune, 0)
+	matching := func(open, close rune) bool {
+		return (open == '(' && close == ')') || (open == '[' && close == ']') || (open == '{' && close == '}')
+	}
+	for _, c := range s {
+		switch c {
+		case '(', '[', '{':
+			stack = append(stack, c)
+		case ')', ']', '}':
+			if len(stack) == 0 || !matching(stack[len(stack)-1], c) {
+				return false
+			}
+			stack = stack[:len(stack)-1]
+		}
+	}
+	return len(stack) == 0
 }
 
 func chapter1() {
@@ -158,11 +178,97 @@ func chapter1() {
 	slice1 = append(slice1, 1)
 	slice1 = append(slice1, 2, 3, 4, 5, 6, 7)
 	fmt.Println(slice1)
+	for i, item := range slice1 {
+		fmt.Printf("%d : %v\n", i, item)
+	}
 
 	// 映射類型
 	var map1 = map[string]string{"aa": "bb", "cc": "dd"}
+	for i, item := range map1 {
+		fmt.Printf("%v : %v\n", i, item)
+	}
 	fmt.Println(map1["aa"])
 	var map1Make = make(map[int]string)
 	map1Make[102] = "222"
-	fmt.Println(map1Make[102])
+	map1Make[103] = "ddddd"
+	if name, ok := map1Make[103]; ok {
+		fmt.Println(name)
+	} else {
+		fmt.Println(map1Make[102])
+	}
+	delete(map1Make, 102)
+
+	gd := 100
+	switch gd {
+	case 99:
+		fmt.Println(99)
+	case 100:
+		fmt.Println(100)
+		fallthrough
+	case 87:
+		fmt.Println(87)
+	default:
+		fmt.Println(78)
+	}
+}
+
+// 接口
+type textMsg struct {
+	Type string
+	Text string
+}
+
+func (tm *textMsg) setText() {
+	tm.Text = "test Text"
+}
+
+type imgMsg struct {
+	Type string
+	Img  string
+}
+
+func (im *imgMsg) setImg() {
+	im.Img = "test img"
+}
+
+type Mes interface {
+	setType()
+}
+
+func (tm *textMsg) setType() {
+	tm.Type = "test text Type"
+}
+
+func (im *imgMsg) setType() {
+	im.Type = "test img type"
+}
+
+func SendMsg(m Mes) {
+	m.setType()
+	switch mptr := m.(type) {
+	case *textMsg:
+		mptr.setText()
+		fmt.Println("m= ", mptr.Text)
+		fmt.Println("m= ", mptr.Type)
+	case *imgMsg:
+		mptr.setImg()
+		fmt.Println("m= ", mptr.Img)
+		fmt.Println("m= ", mptr.Type)
+	}
+	fmt.Println("m= ", m)
+}
+
+func Interface() {
+	tm := textMsg{}
+	SendMsg(&tm)
+	im := imgMsg{}
+	SendMsg(&im)
+	n1 := 1
+	n1interface := interface{}(n1)
+	n2, ok := n1interface.(int)
+	if ok {
+		fmt.Println("n2= ", n2)
+	} else {
+		fmt.Println("error")
+	}
 }
