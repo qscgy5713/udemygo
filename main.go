@@ -6,11 +6,33 @@ import (
 
 	"github.com/qscgy5713/udemygo/pkg1"
 	"github.com/qscgy5713/udemygo/pkg2"
+	qu "github.com/qscgy5713/udemygo/queue"
+	st "github.com/qscgy5713/udemygo/stack"
 )
 
 func main() {
-	s := "([{]])"
-	isValid(s)
+	// s := "([{]])"
+	// isValid(s)
+	// st1 := "[[],[1],[]]"
+	stack := st.Stack{Data: make([]int, 0)}
+	stack.Push(1)
+	stack.Push(2)
+	stack.Push(3)
+
+	fmt.Println("栈顶元素:", stack.Top())    // 输出: 3
+	fmt.Println("弹出栈顶元素:", stack.Pop())  // 输出: 3
+	fmt.Println("栈顶元素:", stack.Top())    // 输出: 2
+	fmt.Println("栈是否为空:", stack.Empty()) // 输出: false
+
+	queue := qu.Queue{Data: make([]int, 0)}
+	queue.Push(1)
+	queue.Push(2)
+	queue.Push(3)
+
+	fmt.Println("队首元素:", queue.Peek())    // 输出: 1
+	fmt.Println("出队元素:", queue.Pop())     // 输出: 1
+	fmt.Println("队列大小:", queue.Size())    // 输出: 2
+	fmt.Println("队列是否为空:", queue.Empty()) // 输出: false
 }
 
 func isValid(s string) bool {
