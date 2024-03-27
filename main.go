@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"strings"
 
+	"github.com/qscgy5713/udemygo/Binarytree"
 	"github.com/qscgy5713/udemygo/pkg1"
 	"github.com/qscgy5713/udemygo/pkg2"
 	qu "github.com/qscgy5713/udemygo/queue"
@@ -33,6 +35,20 @@ func main() {
 	fmt.Println("出队元素:", queue.Pop())     // 输出: 1
 	fmt.Println("队列大小:", queue.Size())    // 输出: 2
 	fmt.Println("队列是否为空:", queue.Empty()) // 输出: false
+
+	// 示例二叉树: [1, nil, 2, 3]
+	root := &Binarytree.TreeNode{Val: 1}
+	root.Right = &Binarytree.TreeNode{Val: 2}
+	root.Right.Left = &Binarytree.TreeNode{Val: 3}
+	values := []int{3, 9, 20, math.MinInt32, math.MinInt32, 15, 7}
+	bT := Binarytree.CreateBinaryTree(values)
+	// 测试输出
+	fmt.Println("树的根节点值:", bT.Val)
+	fmt.Println("树的左子节点值:", bT.Left.Val)
+	fmt.Println("树的右子节点值:", bT.Right.Val)
+	fmt.Println("树的右子节点的左子节点值:", bT.Right.Left.Val)
+	fmt.Println("树的右子节点的右子节点值:", bT.Right.Right.Val)
+
 }
 
 func isValid(s string) bool {
